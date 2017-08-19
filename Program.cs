@@ -4,32 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _11._5练习
+namespace Vector
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)//实现向量加减法
         {
-            Person first = new Person("A", 19);
-            Person second = new Person("B", 20);
-            Person third = new Person("C", 20);
-            People ManyPeople = new People();
-            ManyPeople.Add(first);
-            ManyPeople.Add(second);
-            ManyPeople.Add(third);
-            People theOld = ManyPeople.GetOldest();
-            //Person[] many = ManyPeople.GetOldest();
-            //foreach(Person one in many)
-            //{
-            //    Console.WriteLine(one.Name + "  " + one.Age);
-            //}
-            foreach(Person one in theOld)
-            {
-                Console.WriteLine(one.Name + "  " + one.Age);
-            }
-            
+            Vector v1 = GetVector("vector1");
+            Vector v2 = GetVector("vector2");
+            Console.WriteLine("{0} + {1} = {2}", v1, v2, v1 + v2);
+            Console.WriteLine("{0} - {1} ={2}", v1, v2, v1 - v2);
             Console.ReadKey();
+        }
 
+        static Vector GetVector(string name)
+        {
+            Console.WriteLine("Input {0} magnitude:", name);
+            double? r = GetNullableDouble();
+            Console.WriteLine("Input {0} angle (in degrees):", name);
+            double? theta = GetNullableDouble();
+            return new Vector(r, theta);
+        }
+
+        static double? GetNullableDouble()
+        {
+            double? result;
+            string userInput = Console.ReadLine();
+            try
+            {
+                result = double.Parse(userInput);
+            }
+            catch
+            {
+                result = null;
+            }
+            return result;
         }
     }
 }
